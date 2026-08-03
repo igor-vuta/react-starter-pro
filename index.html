@@ -2,13 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%9B%3C/text%3E%3C/svg%3E"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luxenon Beterris</title>
+    <meta
+      name="description"
+      content="React Starter Pro — a React 19 + Vite + Tailwind template with ESLint, Prettier, Husky and a four-branch Git workflow."
+    />
+    <meta name="theme-color" content="#11141c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>React Starter Pro — React 19 + Vite + Tailwind template</title>
+    <script>
+      // Apply the saved theme before first paint to avoid a light-mode flash.
+      try {
+        const stored = localStorage.getItem('rsp-theme')
+        const dark =
+          stored === 'dark' ||
+          (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.toggle('dark', dark)
+      } catch {
+        // localStorage can throw in private-browsing modes; the app-level
+        // useTheme hook will settle the theme after hydration.
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

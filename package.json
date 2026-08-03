@@ -1,31 +1,43 @@
 {
-  "name": "webportfolio",
+  "name": "react-starter-pro",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "React 19 + Vite + Tailwind starter with ESLint, Prettier, Husky and a four-branch Git workflow.",
+  "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "husky install",
-    "format": "prettier --write ."
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "verify": "npm run format:check && npm run lint && npm run build",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "eslint --fix",
-      "eslint --max-warnings=0"
+      "eslint --fix --max-warnings=0"
+    ],
+    "*.{css,html,json,md,yml,yaml}": [
+      "prettier --write"
     ]
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.2"
+    "react-router": "^8.3.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.27.5",
     "@babel/preset-react": "^7.27.1",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.25.0",
     "@tailwindcss/postcss": "^4.1.10",
     "@tailwindcss/vite": "^4.1.10",
@@ -39,7 +51,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
-    "husky": "^8.0.0",
+    "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "postcss": "^8.5.6",
     "prettier": "^3.5.3",
