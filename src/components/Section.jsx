@@ -1,24 +1,24 @@
-export default function Section({ id, eyebrow, title, description, children }) {
+/**
+ * A numbered top-level section (§1, §2, …). Sub-sections use `Subsection`.
+ *
+ * The gap between sections is a margin rather than padding so that an anchor
+ * jump lands on the heading instead of 4rem of empty space above it.
+ */
+export default function Section({ id, number, title, lead, children }) {
   return (
-    <section id={id} className="border-t border-ink-100 py-20 dark:border-ink-900 sm:py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <header className="max-w-2xl">
-          {eyebrow && (
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600 dark:text-brand-400">
-              {eyebrow}
-            </p>
-          )}
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
-            {title}
-          </h2>
-          {description && (
-            <p className="mt-4 text-base leading-relaxed text-ink-600 dark:text-ink-400">
-              {description}
-            </p>
-          )}
-        </header>
-        <div className="mt-12">{children}</div>
-      </div>
+    <section id={id} className="mt-16 first:mt-4">
+      <header className="mb-6 border-b rule pb-4">
+        <div className="label mb-2">Section {number}</div>
+        <h2 className="font-sans text-[1.6rem] font-bold leading-tight tracking-tight text-ink dark:text-white">
+          {title}
+        </h2>
+        {lead && (
+          <p className="mt-3 max-w-[64ch] text-[1.02rem] italic leading-relaxed text-muted dark:text-parchment-muted">
+            {lead}
+          </p>
+        )}
+      </header>
+      <div className="article">{children}</div>
     </section>
   )
 }
