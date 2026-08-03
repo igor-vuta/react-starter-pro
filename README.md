@@ -4,7 +4,7 @@
 
 **A React 19 + Vite template that already has the boring parts solved.**
 
-[Live demo](https://igor-vuta.github.io/react-starter-pro/) ·
+[Specification & rationale](https://igor-vuta.github.io/react-starter-pro/) ·
 [Development guide](./docs/DEVELOPMENT.md) ·
 [Branching strategy](./docs/BRANCHING.md) ·
 [Code quality](./docs/CODE_QUALITY.md) ·
@@ -28,6 +28,11 @@ Most starters give you a build tool and stop. This one also gives you the
 workflow: a linter and formatter that do not fight, Git hooks that catch
 problems before they reach CI, and a four-branch strategy that still works when
 there is more than one person on the repo.
+
+It also gives you the **reasoning**. The deployed page is not a feature list —
+it is a full [specification and rationale](https://igor-vuta.github.io/react-starter-pro/)
+for every decision here, including what each one was chosen over, what it
+costs, and the condition under which you should revisit it.
 
 - ⚡ **React 19 + Vite 6** — instant HMR, optimised production build
 - 🎨 **Tailwind CSS v4** — CSS-first theming, design tokens in `@theme`
@@ -91,12 +96,13 @@ react-starter-pro/
 │   ├── CONTRIBUTING.md          # the short version
 │   └── RESOURCES.md             # curated reading list
 ├── src/
-│   ├── components/              # one component per file, PascalCase
-│   ├── data/content.js          # page copy and links, kept out of the JSX
-│   ├── hooks/useTheme.js        # theme state + persistence
-│   ├── App.jsx
+│   ├── components/              # document primitives: Section, Figure, Table, Cite, …
+│   ├── sections/                # the sections of the document, in reading order
+│   ├── data/document.js         # outline, references, glossary — prose data, not markup
+│   ├── hooks/                   # useTheme, useActiveSection, useOnScroll, useHashTarget
+│   ├── App.jsx                  # composition only
 │   ├── main.jsx
-│   └── index.css                # Tailwind import + @theme design tokens
+│   └── index.css                # Tailwind import, @theme tokens, document typography
 ├── commitlint.config.js
 ├── eslint.config.js
 ├── vite.config.js

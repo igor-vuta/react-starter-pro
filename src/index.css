@@ -1,103 +1,171 @@
 @import 'tailwindcss';
 
-/* Toggle dark mode with a `.dark` class on <html> instead of the OS preference,
-   so the in-app theme switch can override the system setting. */
+/* Dark mode is driven by a `.dark` class on <html> rather than the OS
+   preference, so the reader's explicit choice can override the system. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, monospace;
+  --font-serif: 'Source Serif 4', 'Iowan Old Style', Georgia, Cambria, serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  --color-brand-50: #eef6ff;
-  --color-brand-100: #d9ecff;
-  --color-brand-200: #bcdeff;
-  --color-brand-300: #8ecaff;
-  --color-brand-400: #59acff;
-  --color-brand-500: #338bff;
-  --color-brand-600: #1d6df5;
-  --color-brand-700: #1657e1;
-  --color-brand-800: #1948b6;
-  --color-brand-900: #1a408f;
+  /* Light — paper */
+  --color-paper: #fdfcf9;
+  --color-paper-tint: #f4f1e9;
+  --color-rule: #ded8ca;
+  --color-ink: #1b1a17;
+  --color-muted: #565249;
+  --color-accent: #8a2b2b;
 
-  --color-ink-50: #f6f7f9;
-  --color-ink-100: #eceef2;
-  --color-ink-200: #d5d9e2;
-  --color-ink-300: #b0b8c9;
-  --color-ink-400: #8590a8;
-  --color-ink-500: #66728c;
-  --color-ink-600: #505a73;
-  --color-ink-700: #41495d;
-  --color-ink-800: #2b3141;
-  --color-ink-900: #1b1f2b;
-  --color-ink-950: #11141c;
-
-  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-  --animate-float: float 7s ease-in-out infinite;
-
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translate3d(0, 0, 0) scale(1);
-    }
-    50% {
-      transform: translate3d(0, -18px, 0) scale(1.04);
-    }
-  }
+  /* Dark — slate */
+  --color-night: #131418;
+  --color-night-tint: #1a1c22;
+  --color-night-rule: #2b2f39;
+  --color-parchment: #e7e4dc;
+  --color-parchment-muted: #99958c;
+  --color-clay: #dda291;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    /* Anchor jumps are instant, not smooth. The document is roughly forty
+       screens tall, so a smooth scroll between distant sections would take
+       seconds of unreadable blur — and an animated scroll is cancelled by the
+       re-render our own scroll listeners trigger, so it would not arrive. */
+    scroll-behavior: auto;
+    scroll-padding-top: 5.5rem;
   }
 
   body {
-    @apply bg-white text-ink-800 antialiased dark:bg-ink-950 dark:text-ink-200;
+    @apply bg-paper font-serif text-ink antialiased dark:bg-night dark:text-parchment;
+    font-feature-settings: 'kern', 'liga', 'onum';
   }
 
   ::selection {
-    @apply bg-brand-500/25;
+    @apply bg-accent/15 dark:bg-clay/25;
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-500;
+    @apply rounded-xs outline-2 outline-offset-2 outline-accent dark:outline-clay;
+  }
+
+  sup {
+    font-variant-position: super;
+    line-height: 0;
   }
 }
 
+/*
+ * Document typography. The article is written as semantic HTML and styled
+ * here, so the section components stay readable prose rather than a wall of
+ * utility classes.
+ */
 @layer components {
-  .card {
-    @apply rounded-2xl border border-ink-200/70 bg-white/70 p-6 shadow-sm backdrop-blur transition
-      duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-lg dark:border-ink-800
-      dark:bg-ink-900/60 dark:hover:border-brand-700;
+  .article {
+    @apply text-[1.0625rem] leading-[1.72] text-ink/95 dark:text-parchment/85;
+    hanging-punctuation: first last;
   }
 
-  .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-ink-200 px-3 py-1 text-xs
-      font-medium text-ink-600 dark:border-ink-800 dark:text-ink-400;
+  .article p {
+    @apply my-[0.9em] max-w-[68ch];
+    text-wrap: pretty;
+  }
+
+  /* Opening paragraph of a section: no indent, slightly larger. */
+  .article > p:first-of-type {
+    @apply text-[1.125rem] leading-[1.7];
+  }
+
+  .article a {
+    @apply text-accent underline decoration-accent/30 underline-offset-[3px]
+      transition-colors hover:decoration-accent dark:text-clay dark:decoration-clay/30
+      dark:hover:decoration-clay;
+  }
+
+  .article strong {
+    @apply font-semibold text-ink dark:text-white;
+  }
+
+  .article em {
+    @apply italic;
+  }
+
+  .article code {
+    @apply rounded-[3px] bg-paper-tint px-[0.35em] py-[0.1em] font-mono text-[0.855em]
+      text-ink/90 dark:bg-night-tint dark:text-parchment/90;
+  }
+
+  .article h3 {
+    @apply mt-10 mb-2 max-w-[68ch] font-sans text-[0.95rem] font-semibold tracking-tight
+      text-ink dark:text-white;
+  }
+
+  .article h4 {
+    @apply mt-7 mb-1 max-w-[68ch] font-sans text-[0.8rem] font-semibold uppercase
+      tracking-[0.1em] text-muted dark:text-parchment-muted;
+  }
+
+  .article ul,
+  .article ol {
+    @apply my-[0.9em] max-w-[66ch] space-y-2 pl-6;
+  }
+
+  .article ul {
+    @apply list-disc marker:text-rule dark:marker:text-night-rule;
+  }
+
+  .article ol {
+    @apply list-decimal marker:font-sans marker:text-[0.85em] marker:text-muted
+      dark:marker:text-parchment-muted;
+  }
+
+  .article li::marker {
+    @apply text-muted dark:text-parchment-muted;
+  }
+
+  .article blockquote {
+    @apply my-6 max-w-[64ch] border-l-2 border-rule pl-5 text-muted italic
+      dark:border-night-rule dark:text-parchment-muted;
+  }
+
+  .article dl {
+    @apply my-5 max-w-[68ch];
+  }
+
+  .article dt {
+    @apply mt-4 font-sans text-[0.9rem] font-semibold text-ink dark:text-white;
+  }
+
+  .article dd {
+    @apply mt-1 ml-0 text-[1rem];
+  }
+
+  /* Small-caps label used for eyebrows and metadata rows. */
+  .label {
+    @apply font-sans text-[0.7rem] font-semibold uppercase tracking-[0.16em]
+      text-muted dark:text-parchment-muted;
+  }
+
+  .rule {
+    @apply border-rule dark:border-night-rule;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .article {
+    font-size: 11pt;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
