@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function CodeBlock({ code, label }) {
+export default function CodeBlock({ code, label, caption }) {
   const [copied, setCopied] = useState(false)
 
   async function copy() {
@@ -9,34 +9,41 @@ export default function CodeBlock({ code, label }) {
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1600)
     } catch {
-      // Clipboard is unavailable (insecure origin or denied permission) —
-      // the code is selectable, so silently leave the button alone.
+      // Clipboard is unavailable on insecure origins or when permission is
+      // denied. The listing is selectable, so leave the button unchanged.
     }
   }
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-ink-200 bg-ink-950 dark:border-ink-800">
-      {label && (
-        <div className="flex items-center gap-2 border-b border-white/10 px-4 py-2">
-          <span className="size-2.5 rounded-full bg-rose-400/80" />
-          <span className="size-2.5 rounded-full bg-amber-400/80" />
-          <span className="size-2.5 rounded-full bg-emerald-400/80" />
-          <span className="ml-2 font-mono text-xs text-ink-400">{label}</span>
-        </div>
+    <div className="my-6 max-w-[72ch]">
+      <div className="group relative overflow-hidden rounded-sm border rule bg-paper-tint/70 dark:bg-night-tint">
+        {label && (
+          <div className="flex items-center justify-between border-b rule px-4 py-1.5">
+            <span className="label !text-[0.65rem]">{label}</span>
+          </div>
+        )}
+        <button
+          type="button"
+          onClick={copy}
+          aria-label={copied ? 'Copied to clipboard' : 'Copy listing to clipboard'}
+          className="no-print absolute right-2 top-1.5 rounded-xs border rule bg-paper px-2 py-0.5
+            font-sans text-[0.65rem] font-medium text-muted opacity-0 transition
+            hover:text-ink focus-visible:opacity-100 group-hover:opacity-100
+            dark:bg-night dark:text-parchment-muted dark:hover:text-white"
+        >
+          {copied ? 'Copied' : 'Copy'}
+        </button>
+        <pre className="overflow-x-auto px-4 py-3.5">
+          <code className="font-mono text-[0.8rem] leading-[1.7] text-ink/90 dark:text-parchment/85">
+            {code}
+          </code>
+        </pre>
+      </div>
+      {caption && (
+        <p className="!mt-2 !max-w-[68ch] font-sans !text-[0.78rem] leading-relaxed text-muted dark:text-parchment-muted">
+          {caption}
+        </p>
       )}
-      <button
-        type="button"
-        onClick={copy}
-        aria-label={copied ? 'Copied' : 'Copy to clipboard'}
-        className="absolute right-2 top-2 rounded-md border border-white/10 bg-white/5 px-2 py-1 text-xs
-          font-medium text-ink-300 opacity-0 transition hover:bg-white/10 hover:text-white
-          focus-visible:opacity-100 group-hover:opacity-100"
-      >
-        {copied ? 'Copied' : 'Copy'}
-      </button>
-      <pre className="overflow-x-auto px-4 py-4 text-sm leading-relaxed">
-        <code className="font-mono text-ink-200">{code}</code>
-      </pre>
     </div>
   )
 }

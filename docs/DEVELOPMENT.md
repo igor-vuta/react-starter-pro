@@ -72,14 +72,16 @@ react-starter-pro/
 │   ├── DEVELOPMENT.md          # you are here
 │   ├── BRANCHING.md            # the four-branch strategy
 │   ├── CODE_QUALITY.md         # ESLint, Prettier, Husky in detail
+│   ├── CONTRIBUTING.md         # the short version
 │   └── RESOURCES.md            # curated reading list
 ├── src/
-│   ├── components/             # one component per file, PascalCase
-│   ├── data/content.js         # copy and link data for the landing page
+│   ├── components/             # document primitives: Section, Figure, Table, Cite, …
+│   ├── sections/               # the sections of the document, in reading order
+│   ├── data/document.js        # outline, references, glossary — prose data, not markup
 │   ├── hooks/                  # reusable hooks, prefixed with `use`
 │   ├── App.jsx                 # page composition
 │   ├── main.jsx                # React root
-│   └── index.css               # Tailwind import + @theme design tokens
+│   └── index.css               # Tailwind import, @theme tokens, document typography
 ├── commitlint.config.js
 ├── eslint.config.js            # ESLint flat config
 ├── vite.config.js
