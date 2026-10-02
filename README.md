@@ -13,6 +13,12 @@ _Project facts checked 2 October 2026. Activity badges update from GitHub._
 
 <!-- project-presentation:end -->
 
+<!-- project-pattern:start -->
+
+![Three crossing elliptical orbits surround a central atom nucleus.](.github/project-pattern.svg)
+
+<!-- project-pattern:end -->
+
 <div align="center">
 
 # ⚡️ React Starter Pro
