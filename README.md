@@ -1,3 +1,18 @@
+<!-- project-presentation:start -->
+
+![React Starter Pro — React and Vite template with a documented development workflow](.github/readme-header.svg)
+
+**[Open project](https://igor-vuta.github.io/react-starter-pro/)** · [Repository activity](https://github.com/igor-vuta/react-starter-pro/activity)
+
+[![Last commit](https://img.shields.io/github/last-commit/igor-vuta/react-starter-pro?style=flat-square&color=6366f1)](https://github.com/igor-vuta/react-starter-pro/commits)
+[![Repository size](https://img.shields.io/github/repo-size/igor-vuta/react-starter-pro?style=flat-square&color=6366f1)](https://github.com/igor-vuta/react-starter-pro)
+
+**8** Document sections · **React 19** UI library · **Vite 6** Build tooling
+
+_Project facts checked 2 October 2026. Activity badges update from GitHub._
+
+<!-- project-presentation:end -->
+
 <div align="center">
 
 # ⚡️ React Starter Pro
@@ -56,7 +71,7 @@ npm install     # installs dependencies *and* the Git hooks
 npm run dev     # http://localhost:5173
 ```
 
-Requires **Node 20+** (`.nvmrc` pins it) and npm. Then read
+Requires **Node 24.19+** (`.nvmrc` pins it) and npm. Then read
 [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md).
 
 ---
