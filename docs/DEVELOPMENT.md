@@ -18,11 +18,11 @@ section, read [Your first change](#your-first-change).
 
 ## Prerequisites
 
-| Tool | Version | Notes                                                   |
-| ---- | ------- | ------------------------------------------------------- |
-| Node | >= 20   | `.nvmrc` pins 20 — run `nvm use` if you use nvm         |
-| npm  | >= 10   | Ships with Node 20; the lockfile is `package-lock.json` |
-| Git  | any     | SSH remote recommended, signed commits encouraged       |
+| Tool | Version  | Notes                                                   |
+| ---- | -------- | ------------------------------------------------------- |
+| Node | >= 24.19 | `.nvmrc` pins 24.19.0 — run `fnm use` if you use fnm    |
+| npm  | >= 10    | Ships with Node 24; the lockfile is `package-lock.json` |
+| Git  | any      | SSH remote recommended, signed commits encouraged       |
 
 This project uses **npm**, not pnpm or yarn. Mixing package managers produces a
 second lockfile and breaks `npm ci` in CI, so stick to npm.
